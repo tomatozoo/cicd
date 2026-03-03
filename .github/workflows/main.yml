@@ -34,8 +34,13 @@ jobs:
           pytest
 
       # 6. Continuous Deployment (CD) - 시뮬레이션
-      - name: Deploy Simulation
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          echo "테스트가 성공하여 배포를 시뮬레이션합니다."
-          echo "실제 환경에서는 여기에 서버 접속 명령어나 Docker build 명령어가 들어갑니다."
+      - name: Deploy to k8s
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/cicd
+            git pull origin main
+            kubectl apply -f deploy/deployment.yaml
