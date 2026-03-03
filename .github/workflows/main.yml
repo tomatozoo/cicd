@@ -43,4 +43,4 @@ jobs:
           script: |
             cd /home/ubuntu/cicd
             git pull origin main
-            sudo kubectl apply -f deploy/deployment.yaml
+            sudo kubectl set image deployment/myapp myapp=DOCKER_ID/myapp:latest
