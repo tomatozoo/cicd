@@ -34,7 +34,7 @@ jobs:
           pytest
 
       # 6. Continuous Deployment (CD) - 시뮬레이션
-      - name: Deploy to k8s
+      - name: Deploy to aws k8s
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
