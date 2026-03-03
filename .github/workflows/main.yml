@@ -43,4 +43,4 @@ jobs:
           script: |
             cd /home/ubuntu/cicd
             git pull origin main
-            kubectl apply -f deploy/deployment.yaml
+            sudo kubectl apply -f deploy/deployment.yaml
